@@ -16,14 +16,14 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Random Genre Generator")
 
         # Main layout ####################################################
-        main_layout = QHBoxLayout()
+        main_layout = QVBoxLayout()
 
 
         # Top and bottom panes ############################################
         top_pane = QVBoxLayout()
         bottom_pane = QVBoxLayout()
 
-        title_label = QLabel("Random Genre Generator")
+        title_label = QLabel("Random Genrenator")
 
          # Set fonts ########################################################
         h1_font = title_label.font()
@@ -36,7 +36,7 @@ class MainWindow(QMainWindow):
         h2_font.setPointSize(26)
         self.results_title_label.setFont(h2_font)
 
-        self.results_label = QLabel("Select a genre or story and how many generations you want")
+        self.results_label = QLabel("Select a genre or story and how many generations you want!")
         p_font = self.results_label.font()
         p_font.setPointSize(16)
         self.results_label.setFont(p_font)
@@ -45,24 +45,31 @@ class MainWindow(QMainWindow):
         self.genre_radio = QRadioButton()
         self.genre_radio.setText("Genre")
         self.genre_radio.setChecked(True)
-        self.story_cb = QRadioButton()
-        self.story_cb.setText("Story")
-        slider_label = QLabel("Amount of Generations")
-        self.gen_slider = QSlider()
+        self.story_radio = QRadioButton()
+        self.story_radio.setText("Story")
+        
+        combo_label = QLabel("Amount of Generations:")
+        self.gen_combo = QComboBox()
+        self.gen_combo.addItem("1")
+        self.gen_combo.addItem("2")
+        self.gen_combo.addItem("3")
+        self.gen_combo.addItem("4")
+        self.gen_combo.addItem("5")
         self.gen_btn = QPushButton("Generate")
         self.gen_btn.clicked.connect(self.generate)
 
         # Add top pane widgets #####################################################
         top_pane.addWidget(title_label)
         top_pane.addWidget(self.genre_radio)
-        top_pane.addWidget(self.story_cb)
-        top_pane.addWidget(slider_label)
-        top_pane.addWidget(self.gen_slider)
+        top_pane.addWidget(self.story_radio)
+        top_pane.addWidget(combo_label)
+        top_pane.addWidget(self.gen_combo)
         top_pane.addWidget(self.gen_btn)
 
         # Add bottom pane widgets ###################################################
         bottom_pane.addWidget(self.results_title_label)
         bottom_pane.addWidget(self.results_label)
+       
 
         # Add the two panes to the layout ###########################################
         main_layout.addLayout(top_pane)
@@ -77,16 +84,12 @@ class MainWindow(QMainWindow):
         
     def generate(self):
         genre = self.genre_radio.text()
-        story = self.story_cb.text()
-        number = self.gen_slider.value()
+        story = self.story_radio.text()
 
         if self.genre_radio.isChecked():
             response = controller.genre_response()
         else:
             response = controller.story_response()
-       
-
-        self.results_label.setText(response)
 
 
 
