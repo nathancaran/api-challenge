@@ -36,7 +36,7 @@ class MainWindow(QMainWindow):
         h2_font.setPointSize(26)
         self.results_title_label.setFont(h2_font)
 
-        self.results_label = QLabel("Select a genre or story and how many generations you want!")
+        self.results_label = QLabel("Select a genre or story and how many generations you want! (1-5)")
         p_font = self.results_label.font()
         p_font.setPointSize(16)
         self.results_label.setFont(p_font)
@@ -91,7 +91,7 @@ class MainWindow(QMainWindow):
         else:
             response = controller.story_response()
 
-
+        self.results_label.setText(response)
 
 
 
