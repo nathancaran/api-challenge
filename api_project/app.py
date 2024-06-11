@@ -49,12 +49,12 @@ class MainWindow(QMainWindow):
         self.story_radio.setText("Story")
         
         combo_label = QLabel("Amount of Generations:")
-        self.gen_combo = QComboBox()
-        self.gen_combo.addItem("1")
-        self.gen_combo.addItem("2")
-        self.gen_combo.addItem("3")
-        self.gen_combo.addItem("4")
-        self.gen_combo.addItem("5")
+        self.num_combo = QComboBox()
+        self.num_combo.addItem("1")
+        self.num_combo.addItem("2")
+        self.num_combo.addItem("3")
+        self.num_combo.addItem("4")
+        self.num_combo.addItem("5")
         self.gen_btn = QPushButton("Generate")
         self.gen_btn.clicked.connect(self.generate)
 
@@ -63,7 +63,7 @@ class MainWindow(QMainWindow):
         top_pane.addWidget(self.genre_radio)
         top_pane.addWidget(self.story_radio)
         top_pane.addWidget(combo_label)
-        top_pane.addWidget(self.gen_combo)
+        top_pane.addWidget(self.num_combo)
         top_pane.addWidget(self.gen_btn)
 
         # Add bottom pane widgets ###################################################
@@ -85,21 +85,14 @@ class MainWindow(QMainWindow):
     def generate(self):
         genre = self.genre_radio.text()
         story = self.story_radio.text()
-
+        amount = self.num_combo.currentText()
         if self.genre_radio.isChecked():
-            response = controller.genre_response()
+            response = controller.genre_response(amount)
         else:
-            response = controller.story_response()
+            response = controller.story_response(amount)
 
         self.results_label.setText(response)
 
-
-
-
-
-
-
-    
     
 app = QApplication(sys.argv)
 
